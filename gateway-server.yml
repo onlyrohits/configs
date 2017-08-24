@@ -1,0 +1,23 @@
+# Define the port where the API gateway server would be running
+server:
+  port: 8765
+
+
+# Note that we don't proxy the calls to the authorization server. The reason being that
+# Spring cloud security would need to secure the api gateway before it can route the
+# requests using zuul
+zuul:
+  routes:
+    user-server: /api/user/**
+    web-portal: /**
+# Define the Eureka server that handles service registration
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+
+datasource:
+    url: jdbc:mysql://localhost:3306/auth
+    username: root
+    password: password
+    driver-class: com.mysql.jdbc.Driver
